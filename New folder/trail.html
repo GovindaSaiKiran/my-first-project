@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap & CSS Assignment</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 3. FLEXBOX NAVBAR (Custom Styling) */
+        .custom-navbar {
+            display: flex;
+            /* Flexbox activation */
+            justify-content: space-between;
+            /* Spacing items */
+            align-items: center;
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 2rem;
+            /* Box model: padding */
+            margin-bottom: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #ffc107;
+        }
+
+        /* Custom Box Model styling for highlighting */
+        .highlight-box {
+            border: 2px solid #dee2e6;
+            background-color: white;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="custom-navbar">
+        <div class="logo">
+            <h3>MyPortfolio</h3>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4">Welcome to my Page</h1>
+                <p class="lead">This page demonstrates the integration of Bootstrap 5 components with custom CSS styling.</p>
+
+                <button type="button" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#bioModal">
+                    Read My Bio
+                </button>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Coding Workspace" class="img-fluid rounded shadow p-2 bg-white">
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h3 class="mb-4 text-center">Featured Project</h3>
+                <div class="card highlight-box shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        Web Development
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="card-title">Bootstrap Integration Project</h5>
+                        <p class="card-text">
+                            This card demonstrates the usage of the Bootstrap card component.
+                            It lives inside a responsive grid column that spans 8 units on medium screens.
+                        </p>
+                        <a href="#" class="btn btn-outline-dark">View Project Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="bioModal" tabindex="-1" aria-labelledby="bioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bioModalLabel">Developer Bio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Hello! I am a web developer learning how to use Bootstrap 5.</p>
+                    <p>I love creating responsive grids and styling components with utility classes like <code>p-3</code> and <code>mt-3</code>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
