@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Hub - Your Time-Saving Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-600">
+                App Hub
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-2">Your curated guide to the best apps and services. Save time, find the best.</p>
+        </header>
+
+        <div class="mb-8 md:mb-12">
+            <input type="text" id="searchBar" placeholder="Search for a department (e.g., AI, Food, Travel)..." class="w-full p-4 border border-gray-300 rounded-lg shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+        </div>
+
+        <div id="card-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        </div>
+
+        <div id="no-results" class="text-center text-gray-500 text-2xl font-medium hidden py-16">
+            <p>😕 No departments found for that search.</p>
+            <p>if department is not found content‪+91 9398651969‬</p>
+            <p>instagram id:-swaroop_medisetti</p>
+            <p>Snap id:- mtejadurgaswaro</p>
+            <p class="text-lg mt-2">Try searching for a different keyword.</p>
+        </div>
+
+    </div>
+    <script>
+        const categories = [{
+                title: "AI Image Generators",
+                description: "Create stunning images from text descriptions.",
+                tags: ['ai', 'image', 'art', 'generator', 'design', 'dalle', 'midjourney'],
+                recommendations: [{
+                        name: "DALL-E 3",
+                        url: "https://openai.com/dall-e-3",
+                        desc: "Best overall, integrated with ChatGPT."
+                    },
+                    {
+                        name: "Leonardo.Ai",
+                        url: "https://leonardo.ai/",
+                        desc: "Excellent free plan and fine-tuned models."
+                    },
+                    {
+                        name: "Adobe Firefly",
+                        url: "https://www.adobe.com/products/firefly.html",
+                        desc: "Great for professionals, built into Photoshop."
+                    },
+                    {
+                        name: "Canva",
+                        url: "https://www.canva.com/ai-image-generator/",
+                        desc: "Best for beginners and social media graphics."
+                    }
+                ]
+            },
+            {
+                title: "AI Video Generators",
+                description: "Turn text, images, or existing videos into new creations.",
+                tags: ['ai', 'video', 'editing', 'generator', 'sora', 'veo'],
+                recommendations: [{
+                        name: "Sora",
+                        url: "https://openai.com/sora",
+                        desc: "High-quality, realistic video (coming soon)."
+                    },
+                    {
+                        name: "Runway",
+                        url: "https://runwayml.com/",
+                        desc: "A powerful suite of AI video tools."
+                    },
+                    {
+                        name: "Pika",
+                        url: "https://pika.art/",
+                        desc: "Creative and expressive video generation."
+                    },
+                    {
+                        name: "Synthesia",
+                        url: "https://www.synthesia.io/",
+                        desc: "Best for creating AI avatars for business."
+                    }
+                ]
+            },
+            {
+                title: "AI Chatbots",
+                description: "Conversational AI for research, coding, and more.",
+                tags: ['ai', 'chatbot', 'chat', 'assistant', 'gpt', 'gemini', 'claude'],
+                recommendations: [{
+                        name: "ChatGPT",
+                        url: "https://chat.openai.com/",
+                        desc: "The all-around best for most tasks."
+                    },
+                    {
+                        name: "Google Gemini",
+                        url: "https://gemini.google.com/",
+                        desc: "Deep integration with Google apps."
+                    },
+                    {
+                        name: "Claude",
+                        url: "https://claude.ai/",
+                        desc: "Best for long-form content and analysis."
+                    },
+                    {
+                        name: "Perplexity AI",
+                        url: "https://www.perplexity.ai/",
+                        desc: "Excellent for research with cited sources."
+                    }
+                ]
+            },
+            {
+                title: "AI for Searching",
+                description: "Get direct answers and summaries from your searches.",
+                tags: ['ai', 'search', 'research', 'answers', 'perplexity'],
+                recommendations: [{
+                        name: "Perplexity AI",
+                        url: "https://www.perplexity.ai/",
+                        desc: "The leader in AI-native search."
+                    },
+                    {
+                        name: "Microsoft Copilot",
+                        url: "https://copilot.microsoft.com/",
+                        desc: "AI search integrated into Bing."
+                    },
+                    {
+                        name: "Komo",
+                        url: "https://komo.ai/",
+                        desc: "A fast, ad-free AI search alternative."
+                    }
+                ]
+            },
+            {
+                title: "Online Shopping",
+                description: "The best places to buy products online.",
+                tags: ['shopping', 'ecommerce', 'fashion', 'electronics', 'amazon', 'flipkart'],
+                recommendations: [{
+                        name: "Amazon",
+                        url: "https://www.amazon.in/",
+                        desc: "The 'everything store' for India."
+                    },
+                    {
+                        name: "Flipkart",
+                        url: "https://www.flipkart.com/",
+                        desc: "A top choice for electronics and fashion."
+                    },
+                    {
+                        name: "Myntra",
+                        url: "https://www.myntra.com/",
+                        desc: "India's leading fashion destination."
+                    }
+                ]
+            },
+            {
+                title: "Food Ordering",
+                description: "Get your favorite meals delivered to your door.",
+                tags: ['food', 'ordering', 'delivery', 'restaurant', 'zomato', 'swiggy'],
+                recommendations: [{
+                        name: "Zomato",
+                        url: "https://www.zomato.com/india",
+                        desc: "Top-rated for restaurant discovery and delivery."
+                    },
+                    {
+                        name: "Swiggy",
+                        url: "https://www.swiggy.com/",
+                        desc: "Known for fast delivery and a huge network."
+                    }
+                ]
+            },
+            {
+                title: "Travelling",
+                description: "Book flights, hotels, and plan your next trip.",
+                tags: ['travel', 'booking', 'flights', 'hotels', 'vacation', 'makemytrip'],
+                recommendations: [{
+                        name: "Google Flights",
+                        url: "https://www.google.com/flights",
+                        desc: "The best tool for finding the cheapest flights."
+                    },
+                    {
+                        name: "MakeMyTrip",
+                        url: "https://www.makemytrip.com/",
+                        desc: "India's all-in-one travel booking site."
+                    },
+                    {
+                        name: "Goibibo",
+                        url: "https://www.goibibo.com/",
+                        desc: "Great for hotels and travel packages."
+                    },
+                    {
+                        name: "Booking.com",
+                        url: "https://www.booking.com/",
+                        desc: "Excellent for finding hotels worldwide."
+                    }
+                ]
+            },
+            {
+                title: "Video & Photo Editing",
+                description: "Software to edit and enhance your photos and videos.",
+                tags: ['video', 'photo', 'editing', 'creative', 'adobe', 'canva'],
+                recommendations: [{
+                        name: "Adobe Premiere Pro",
+                        url: "https://www.adobe.com/products/premiere.html",
+                        desc: "The industry standard for professional video."
+                    },
+                    {
+                        name: "Adobe Lightroom",
+                        url: "https://www.adobe.com/products/photoshop-lightroom.html",
+                        desc: "Powerful photo editing and organization."
+                    },
+                    {
+                        name: "Canva",
+                        url: "https://www.canva.com/",
+                        desc: "Easy video and photo editing for social media."
+                    },
+                    {
+                        name: "CapCut",
+                        url: "https://www.capcut.com/",
+                        desc: "Popular and easy-to-use free video editor."
+                    }
+                ]
+            },
+            {
+                title: "Online Learning Platforms",
+                description: "Learn new skills with courses from top universities.",
+                tags: ['learning', 'education', 'courses', 'study', 'coursera', 'udemy'],
+                recommendations: [{
+                        name: "Coursera",
+                        url: "https://www.coursera.org/",
+                        desc: "Courses and degrees from top universities."
+                    },
+                    {
+                        name: "edX",
+                        url: "https://www.edx.org/",
+                        desc: "Access 4000+ courses from 250+ institutions."
+                    },
+                    {
+                        name: "Udemy",
+                        url: "https://www.udemy.com/",
+                        desc: "A massive library of individual, practical courses."
+                    },
+                    {
+                        name: "Khan Academy",
+                        url: "https://www.khanacademy.org/",
+                        desc: "Completely free learning for K-12 and beyond."
+                    }
+                ]
+            },
+            {
+                title: "Top Courses to Study (2025)",
+                description: "In-demand fields for career growth next year.",
+                tags: ['courses', 'study', 'career', '2025', 'tech', 'ai', 'cybersecurity'],
+                recommendations: [{
+                        name: "AI & Machine Learning",
+                        url: "https://www.coursera.org/browse/data-science/machine-learning",
+                        desc: "The most in-demand tech skill."
+                    },
+                    {
+                        name: "Cybersecurity",
+                        url: "https://www.coursera.org/browse/information-technology/cybersecurity",
+                        desc: "Protecting data is a critical, growing field."
+                    },
+                    {
+                        name: "Cloud Computing",
+                        url: "https://aws.amazon.com/training/",
+                        desc: "Learn platforms like AWS, Azure, and Google Cloud."
+                    },
+                    {
+                        name: "Data Science",
+                        url: "https://www.coursera.org/browse/data-science",
+                        desc: "Turn raw data into actionable insights."
+                    }
+                ]
+            },
+            {
+                title: "Social Media",
+                description: "Connect, share, and discover content.",
+                tags: ['social', 'media', 'chat', 'community', 'instagram', 'tiktok'],
+                recommendations: [{
+                        name: "Instagram",
+                        url: "https://www.instagram.com/",
+                        desc: "Top for sharing photos, reels, and stories."
+                    },
+                    {
+                        name: "TikTok",
+                        url: "https://www.tiktok.com/",
+                        desc: "The king of short-form video content."
+                    },
+                    {
+                        name: "YouTube",
+                        url: "https://www.youtube.com/",
+                        desc: "The #1 platform for long-form video."
+                    },
+                    {
+                        name: "WhatsApp",
+                        url: "https://www.whatsapp.com/",
+                        desc: "The most popular messaging app in India."
+                    }
+                ]
+            },
+            {
+                title: "Search Engines",
+                description: "Find information on the web.",
+                tags: ['search', 'engine', 'google', 'privacy', 'duckduckgo'],
+                recommendations: [{
+                        name: "Google",
+                        url: "https://www.google.com/",
+                        desc: "The most powerful and popular search engine."
+                    },
+                    {
+                        name: "DuckDuckGo",
+                        url: "https://duckduckgo.com/",
+                        desc: "The best option for a privacy-focused search."
+                    },
+                    {
+                        name: "Brave Search",
+                        url: "https://search.brave.com/",
+                        desc: "Private search built into the Brave browser."
+                    }
+                ]
+            },
+            {
+                title: "AI Prompt Generators",
+                description: "Get help writing better prompts for AI tools.",
+                tags: ['ai', 'prompt', 'generator', 'chatgpt'],
+                recommendations: [{
+                        name: "PromptBase",
+                        url: "https://promptbase.com/",
+                        desc: "A marketplace for buying and selling prompts."
+                    },
+                    {
+                        name: "AI Parabellum",
+                        url: "https://www.aiparabellum.com/prompt-generator",
+                        desc: "A strategic prompt builder."
+                    }
+                ]
+            },
+            {
+                title: "Best Colleges in India",
+                description: "Find colleges by course, location, and ranking.",
+                tags: ['college', 'university', 'india', 'education', 'study', 'finder'],
+                recommendations: [{
+                        name: "Careerindia",
+                        url: "https://www.careerindia.com/colleges/",
+                        desc: "A tool to search colleges by course and location."
+                    },
+                    {
+                        name: "CollegeDunia",
+                        url: "https://collegedunia.com/",
+                        desc: "Comprehensive college and course search."
+                    },
+                    {
+                        name: "Shiksha",
+                        url: "https://www.shiksha.com/",
+                        desc: "Reviews, rankings, and admissions info."
+                    }
+                ]
+            },
+            {
+                title: "Typing Practice",
+                description: "Improve your typing speed and accuracy (WPM).",
+                tags: ['typing', 'practice', 'speed', 'keyboard', 'wpm'],
+                recommendations: [{
+                        name: "Keybr",
+                        url: "https://www.keybr.com/",
+                        desc: "Uses AI to learn and adapt to your skill level."
+                    },
+                    {
+                        name: "TypingClub",
+                        url: "https://www.typingclub.com/",
+                        desc: "A gamified, lesson-based learning path."
+                    },
+                    {
+                        name: "TypingPal",
+                        url: "https://www.typingpal.com/en/",
+                        desc: "Comprehensive lessons and tests."
+                    }
+                ]
+            },
+            {
+                title: "Online Trading Platforms",
+                description: "Buy and sell stocks, mutual funds, and more.",
+                tags: ['trading', 'stocks', 'finance', 'investing', 'zerodha'],
+                recommendations: [{
+                        name: "Zerodha",
+                        url: "https://zerodha.com/",
+                        desc: "India's largest and most popular broker."
+                    },
+                    {
+                        name: "Upstox",
+                        url: "https://upstox.com/",
+                        desc: "A leading platform with a user-friendly app."
+                    },
+                    {
+                        name: "Interactive Brokers",
+                        url: "https://www.interactivebrokers.com/",
+                        desc: "Best for advanced and international trading."
+                    }
+                ]
+            },
+            {
+                title: "Online Pharma Stores (India)",
+                description: "Get medicines and health products delivered.",
+                tags: ['pharma', 'medicine', 'health', 'pharmacy', '1mg', 'netmeds'],
+                recommendations: [{
+                        name: "Tata 1mg",
+                        url: "https://www.1mg.com/",
+                        desc: "Medicine delivery, lab tests, and doctor chats."
+                    },
+                    {
+                        name: "PharmEasy",
+                        url: "https://pharmeasy.in/",
+                        desc: "One of India's largest online pharmacies."
+                    },
+                    {
+                        name: "Netmeds",
+                        url: "https://www.netmeds.com/",
+                        desc: "A reliable source for medicine and wellness."
+                    },
+                    {
+                        name: "Apollo 24/7",
+                        url: "https://www.apollo247.com/",
+                        desc: "Backed by the Apollo Hospitals network."
+                    }
+                ]
+            },
+            {
+                title: "Hospitals & Health Issues",
+                description: "Find doctors and hospitals by specialty and area.",
+                tags: ['hospital', 'health', 'doctor', 'practo', 'apollo', 'fortis'],
+                recommendations: [{
+                        name: "Practo",
+                        url: "https://www.practo.com/doctors",
+                        desc: "Find and book appointments with doctors."
+                    },
+                    {
+                        name: "Fortis Healthcare",
+                        url: "https://www.fortishealthcare.com/find-a-doctor",
+                        desc: "Search for doctors in the Fortis network."
+                    },
+                    {
+                        name: "Apollo Hospitals",
+                        url: "https://www.apollohospitals.com/doctors/",
+                        desc: "Find specialists at Apollo hospitals."
+                    }
+                ]
+            },
+            {
+                title: "Voice AI Tools",
+                description: "Voice AI tools help you generate, clone, or enhance voices using AI",
+                tags: ['Voice', 'Speak', 'Talk', 'Voice over', 'Background voice'],
+                recommendations: [{
+                        name: "Murf",
+                        url: "https://murf.ai/",
+                        desc: "Create realistic AI voiceovers for videos and presentations."
+                    },
+                    {
+                        name: "Play",
+                        url: "https://play.ht/",
+                        desc: "Text-to-speech and voice cloning platform for creators."
+                    },
+                    {
+                        name: "ElevenLabs",
+                        url: "https://elevenlabs.io/",
+                        desc: "High-quality voice cloning and real-time speech synthesis."
+                    },
+                    {
+                        name: "Typecast",
+                        url: "https://typecast.ai/",
+                        desc: "Generate human-like voiceovers with emotional tone and avatars."
+                    }
+                ]
+            },
+            {
+                title: "AI Script Writing Tools",
+                description: "AI script writing tools help you generate, edit, and structure scripts for videos, films, and content creation.",
+                tags: ['writer', 'script', 'prompt', 'writing tools', 'Paraphrasing'],
+                recommendations: [{
+                        name: "Sudowrite",
+                        url: "https://sudowrite.com/",
+                        desc: "AI writing assistant great for storytelling and creative scripts."
+                    },
+                    {
+                        name: "Jasper",
+                        url: "https://www.jasper.ai/",
+                        desc: "Powerful AI tool for marketing copy and video script writing."
+                    },
+                    {
+                        name: "ScrpitBook",
+                        url: "https://www.scriptbook.io/",
+                        desc: "AI that analyzes and predicts the success of movie scripts."
+                    },
+                    {
+                        name: "Writeduet",
+                        url: "https://www.writerduet.com/",
+                        desc: "Collaborative writing platform with AI-assisted suggestions."
+                    }
+                ]
+            },
+            {
+                title: "Online Gaming Websites",
+                description: "Online gaming websites let you play free or paid games instantly on your browser with friends or solo.",
+                tags: ['Games', 'fun time', 'playground', 'play area', ],
+                recommendations: [{
+                        name: "Miniclip",
+                        url: "https://www.miniclip.com/",
+                        desc: "Play popular multiplayer and sports games online."
+                    },
+                    {
+                        name: "Crazymonkeygames",
+                        url: "https://www.crazymonkeygames.com/",
+                        desc: "Old-school flash-style online games."
+                    },
+                    {
+                        name: "Poki",
+                        url: "https://poki.com/",
+                        desc: "Simple and fun platform for casual and arcade-style games."
+                    },
+                    {
+                        name: "Crazygames",
+                        url: "https://www.crazygames.com/",
+                        desc: "Huge collection of free browser games across genres."
+                    }
+                ]
+            },
+            {
+                title: "Online Grocery Stores",
+                description: "Online grocery apps let you order fresh fruits, vegetables, and essentials delivered quickly to your doorstep.",
+                tags: ['Supermart', 'Minimart', 'Mart', ' greengrocery ', 'groceries'],
+                recommendations: [{
+                        name: "Blinkit",
+                        url: "https://blinkit.com/",
+                        desc: "Instant grocery delivery within minutes across major Indian cities."
+                    },
+                    {
+                        name: "Instamart",
+                        url: "https://www.swiggy.com/instamart",
+                        desc: "Quick delivery of groceries, snacks, and essentials via Swiggy."
+                    },
+                    {
+                        name: "Bigbasket",
+                        url: "https://www.bigbasket.com/",
+                        desc: "India’s largest online supermarket for fresh produce and household items."
+                    },
+                    {
+                        name: "Dmart",
+                        url: "https://www.dmart.in/",
+                        desc: "Order groceries online and pick them up or get home delivery."
+                    }
+                ]
+            },
+            {
+                title: "Online Anime Websites",
+                description: "Online anime websites let you stream your favorite anime series and movies in high quality, anytime and anywhere.",
+                tags: ['Anime', 'Cartoon', 'Manga', 'Light Novel', 'Hentai '],
+                recommendations: [{
+                        name: "Crunchyroll",
+                        url: "https://www.crunchyroll.com/",
+                        desc: "The biggest official anime platform with simulcasts and dubs."
+                    },
+                    {
+                        name: "Anime-Planet",
+                        url: "https://www.anime-planet.com/",
+                        desc: "Legal streaming site with community features and reviews."
+                    },
+                    {
+                        name: "Netflix-Anime",
+                        url: "https://www.netflix.com/in/browse/genre/7424",
+                        desc: "Huge anime collection, including Netflix Originals."
+                    },
+                    {
+                        name: "hidive",
+                        url: "https://www.hidive.com/",
+                        desc: "Premium anime streaming with exclusive simulcasts."
+                    }
+                ]
+            },
+            {
+                title: "Online OTT Platforms",
+                description: "Online OTT platforms let you stream movies, web series, and TV shows anytime, anywhere on any device.",
+                tags: ['Streaming platforms/services', 'Movies', 'Cinema', 'Timepass', 'Online streaming services '],
+                recommendations: [{
+                        name: "Netflix",
+                        url: "https://www.netflix.com/in/",
+                        desc: "Global leader in movies, web series, and documentaries."
+                    },
+                    {
+                        name: "Primevideo",
+                        url: "https://www.primevideo.com/offers/nonprimehomepage/ref=dv_web_force_root",
+                        desc: "Stream popular movies, TV shows, and Amazon Originals."
+                    },
+                    {
+                        name: "Jio-Hotstar",
+                        url: "https://www.hotstar.com/in/home",
+                        desc: "Home for Disney, Marvel, and live sports in India."
+                    },
+                    {
+                        name: "Zee",
+                        url: "https://www.zee5.com/",
+                        desc: "Watch Indian movies, TV shows, and regional content."
+                    }
+                ]
+            },
+            {
+                title: "Online Music Websites",
+                description: "Online music websites let you stream songs, create playlists, and enjoy your favorite tracks anytime, anywhere",
+                tags: ['Songs', 'Ganna', 'Music', 'melody', 'Tune'],
+                recommendations: [{
+                        name: "Spotify",
+                        url: "https://open.spotify.com/",
+                        desc: "Stream millions of songs, podcasts, and playlists for free or premium."
+                    },
+                    {
+                        name: "YouTube Music",
+                        url: "https://music.youtube.com/",
+                        desc: "Listen to official tracks, remixes, and music videos easily."
+                    },
+                    {
+                        name: "Gaana",
+                        url: "https://www.jiosaavn.com/",
+                        desc: "Indian and international music streaming with smart recommendations."
+                    },
+                    {
+                        name: "JioSaavn",
+                        url: "https://gaana.com/",
+                        desc: "Stream Hindi, English, and regional songs online for free."
+                    }
+                ]
+            },
+            {
+                title: "Online Movie Ticket Booking Websites",
+                description: "Online movie ticket booking websites let you browse movies, choose seats, and book tickets instantly from anywhere.",
+                tags: ['Movie', 'Shows', 'Film', 'Screening', 'Tickets'],
+                recommendations: [{
+                        name: "BookMyShow",
+                        url: "https://in.bookmyshow.com/",
+                        desc: "India’s most popular platform for booking movie and event tickets."
+                    },
+                    {
+                        name: "INOX Movies",
+                        url: "https://www.inoxmovies.com/",
+                        desc: "Easy movie ticket booking with cashback offers and wallet payments."
+                    },
+                    {
+                        name: "PVR Cinemas",
+                        url: "https://www.pvrcinemas.com/",
+                        desc: "Official website for booking tickets at PVR theatres across India."
+                    },
+                    {
+                        name: "District",
+                        url: "https://www.district.in/",
+                        desc: "Book tickets for INOX theatres and explore upcoming movie releases."
+                    }
+                ]
+            },
+            {
+                title: "Online Cloud Storage Platforms",
+                description: "Online cloud storage platforms let you securely store, access, and share your files from anywhere.",
+                tags: ['Cloud', 'Storage', 'files', 'security', 'Online cloud '],
+                recommendations: [{
+                        name: "Google Drive",
+                        url: "https://cloud.google.com/",
+                        desc: "Easy file storage and sharing with Google integration."
+                    },
+                    {
+                        name: "Microsoft OneDrive",
+                        url: "https://www.microsoft.com/en-in/microsoft-365/onedrive/online-cloud-storage",
+                        desc: "Seamless file backup and sync with Microsoft Office."
+                    },
+                    {
+                        name: "iCloud Drive",
+                        url: "https://www.icloud.com/",
+                        desc: "Apple’s cloud solution for photos, files, and device backup."
+                    },
+                    {
+                        name: "Dropbox",
+                        url: "https://www.dropbox.com/",
+                        desc: "Simple and reliable cloud storage for individuals and teams."
+                    }
+                ]
+            },
+        ];
+
+        // --- JAVASCRIPT to build the page and power the search ---
+
+        // Note: We are waiting for DOMContentLoaded to ensure these elements exist
+        // before we try to select them.
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const grid = document.getElementById('card-grid');
+            const searchBar = document.getElementById('searchBar');
+            const noResults = document.getElementById('no-results');
+
+            /**
+             * Renders the category cards based on a filter.
+             * @param {string} filter - The search term to filter by.
+             */
+            function renderCards(filter = '') {
+                // Clear the grid first
+                grid.innerHTML = '';
+                const normalizedFilter = filter.toLowerCase().trim();
+                let cardsFound = 0;
+
+                // Filter the categories
+                const filteredCategories = categories.filter(category => {
+                    // Check if filter matches the title
+                    if (category.title.toLowerCase().includes(normalizedFilter)) {
+                        return true;
+                    }
+                    // Check if filter matches any tag
+                    return category.tags.some(tag => tag.toLowerCase().includes(normalizedFilter));
+                });
+
+                // If no categories, show message and exit
+                if (filteredCategories.length === 0) {
+                    noResults.classList.remove('hidden');
+                    return;
+                }
+
+                // If we have results, hide the 'no results' message
+                noResults.classList.add('hidden');
+
+                // Loop and build HTML for each card
+                filteredCategories.forEach(category => {
+                    // Create the HTML for the recommendation links
+                    const recommendationsHtml = category.recommendations.map(rec => `
+                    <a href="${rec.url}" target="_blank" rel="noopener noreferrer" 
+                        class="block bg-blue-50 text-blue-800 p-3 rounded-lg transition-all shadow-sm hover:shadow-md hover:bg-blue-100 hover:scale-[1.02]">
+                        <strong class="font-medium">${rec.name}</strong>
+                        <p class="text-sm text-blue-700">${rec.desc}</p>
+                    </a>
+                `).join('');
+
+                    // Create the full card HTML
+                    const cardHtml = `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-[1.03] flex flex-col">
+                        <div class="p-5 border-b border-gray-100">
+                            <h2 class="text-2xl font-semibold text-gray-800">${category.title}</h2>
+                            <p class="text-gray-500 text-sm mt-1">${category.description}</p>
+                        </div>
+                        
+                        <div class="p-5 flex-grow">
+                            <div class="space-y-3">
+                                ${recommendationsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                    // Add the card to the grid
+                    grid.innerHTML += cardHtml;
+                });
+            }
+
+            // --- EVENT LISTENERS ---
+
+            // Render all cards when the page first loads
+            renderCards();
+
+            // Filter cards in real-time as the user types
+            searchBar.addEventListener('input', () => {
+                renderCards(searchBar.value);
+            });
+
+        });
+    </script>
+</body>
+    
+
+</html>
